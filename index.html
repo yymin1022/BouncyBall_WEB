@@ -43,8 +43,11 @@
     <body>
         <table id="tableMap" class="center board-padding board">
         </table>
+
+        <a id="divBall" style="position: absolute;">0</a>
     </body>
     <script>
+        var divBall = document.getElementById("divBall");
         var tableBoard = document.getElementById("tableMap");
 
         var arrMap = [
@@ -73,11 +76,24 @@
         var countStar = 0;
 
         drawBoard();
+        renderBall();
+
+        document.onkeypress = function(e){
+            switch(e.key){
+                case 'a':
+                    var value = Number(divBall.style.left.split("px")[0]) - 3 + "px";
+                    divBall.style.left = value;
+                    break;
+                case 'd':
+                    var value = Number(divBall.style.left.split("px")[0]) + 3 + "px";
+                    divBall.style.left = value;
+                    break;
+            }
+        }
 
         function drawBoard(){
             for(var i = 0; i < 20; i++){
                 var tr = document.createElement("tr");
-
                 for(var j = 0; j < 30; j++){
                     var td = document.createElement("td");
 
@@ -93,6 +109,10 @@
 
                 tableBoard.append(tr);
             }
+        }
+
+        function renderBall(){
+            
         }
     </script>
 </html>
