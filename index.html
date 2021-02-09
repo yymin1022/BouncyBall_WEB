@@ -41,10 +41,9 @@
     </head>
 
     <body>
+        <a id="divBall" style="position: absolute;">0</a>
         <table id="tableMap" class="center board-padding board">
         </table>
-
-        <a id="divBall" style="position: absolute;">0</a>
     </body>
     <script>
         var divBall = document.getElementById("divBall");
@@ -73,11 +72,11 @@
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         ];
         var arrStar = [];
+        var ballBounce = 0;
         var countStar = 0;
 
         drawBoard();
         renderBall();
-        initializeBall();
 
         document.onkeypress = function(e){
             switch(e.key){
@@ -110,10 +109,22 @@
 
                 tableBoard.append(tr);
             }
+
+            initializeBall();
         }
 
         function bounceBall(){
+            if(ballBounce < 5){
+                var value = Number(divball.style.top.split("px")[0]) - 5 + "px";
+                divBall.style.top = value;
+            }else if(ballBounce < 9){
+                var value = Number(divball.style.top.split("px")[0]) + 5 + "px";
+                divBall.style.top = value;
+            }else{
+                ballBounce = 0;
+            }
 
+            ballBounce++;
         }
 
         function initializeBall(){
@@ -127,7 +138,7 @@
         function renderBall(){
             setInterval(()=>{
                 bounceBall();
-            }, 10);
+            }, 50);
         }
     </script>
 </html>
