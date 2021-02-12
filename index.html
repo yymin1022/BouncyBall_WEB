@@ -8,13 +8,6 @@
                 border-collapse: collapse;
             }
 
-            .center{
-                transform: translate(-50%, -50%);
-                position: absolute;
-                top: 50%;
-                left: 50%;
-            }
-
             .board{
                 border: 0px solid black;
             }
@@ -26,100 +19,86 @@
                 padding: calc(var(--cell-size) / 2);
             }
 
+            .center{
+                transform: translate(-50%, -50%);
+                position: absolute;
+                top: 50%;
+                left: 50%;
+            }
+
             .hide{
                 display: none;
             }
         </style>
     </head>
 
-    <body>
-        <div id="tableMap" class="center board-padding board"></div>
-        <a id="divBall" style="position: absolute;">0</a>
+    <img>
+        <div id="tableMap" class="board-padding board"></div>
+        <img id="divBall" src="ball.png" style="position: absolute; left: 10px; top: 10px;"></img>
     </body>
     <script>
         var divBall = document.getElementById("divBall");
         var tableBoard = document.getElementById("tableMap");
 
+        var arrMap = [
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        ];
+
         var ball = {
             element: document.querySelector("#divBall"),
-            d_vertical: 0,
-            d_horizontal: 1,
+
+            directionX: 0, //0 : Down, 1 : Up
+            directionY: 1, //0 : Left, 1 : Right
             
             forceX: 0,
             forceY: 0,
 
             a: 0.1,
 
-            style_x: (value) => {
+            styleX: (value) => {
                 if(value != null){
                     document.querySelector("#divBall").style.left = value;
                 }
                 return document.querySelector("#divBall").style.left;
             },
-            style_y: document.querySelector("#divBall").style.top
+            styleY: document.querySelector("#divBall").style.top,
         };
 
-        var arrMap = [
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        ];
-
-        for(var i = 0; i < arrMap.length; i++){
-            for(var j = 0; j < arrMap[i].length; j++){
-                var cell = document.createElement("div");
-                cell.style.position = "absolute";
-                cell.style.height = "20px";
-                cell.style.width = "20px";
-                cell.style.left = j * 20 + "px";
-                cell.style.right = i * 20 + "px";
-
-                if(arrMap[i][j] == 0){
-                    cell.style.backgroundColor = "white";
-                    cell.setAttribute("isGround", false);
-                }else{
-                    cell.style.backgroundColor = "black";
-                    cell.setAttribute("isGround", true);
-                }
-
-                tableBoard.appendChild(cell);
-            }
-        }
-
         var arrStar = [];
-        var ballBounce = 0;
         var countStar = 0;
 
-        // 0 is None, 1 is Up, 2 is Right, 3 is Down, 4 is Left
-        var cng1 = 0;
+        var cng1 = 0; // 0 : None, 1 : Up, 2 : Right, 3 : Down, 4 : Left
         var cng2 = 0;
         var cng3 = 0;
         var cng4 = 0;
 
+        drawBoard();
         setInterval(main, 17);
 
         function main(){
             moveBall();
 
-            x = remove_px(divBall.style.left);
-            y = remove_px(divBall.style.top);
+            x = removePX(divBall.style.left);
+            y = removePX(divBall.style.top);
 
             x1 = Math.floor(x / 20);
             y1 = Math.floor(y / 20);
@@ -182,16 +161,16 @@
             }
         }
 
-        left = false;
-        right = false;
+        isLeft = false;
+        isRight = false;
 
         document.onkeypress = function(e){
             switch(e.key){
                 case 'a':
-                    left = true;
+                    isLeft = true;
                     break;
                 case 'd':
-                    right = true;
+                    isRight = true;
                     break;
             }
         }
@@ -199,30 +178,48 @@
         document.onkeyup = function(e){
             switch(e.key){
                 case 'a':
-                    left = false;
+                    isLeft = false;
                     break;
                 case 'd':
-                    right = false;
+                    isRight = false;
                     break;
             }
         }
 
-        function remove_px(point){
-            return Number(point.split("px")[0]);
+        function drawBoard(){
+            for(var i = 0; i < arrMap.length; i++){
+            for(var j = 0; j < arrMap[i].length; j++){
+                var cell = document.createElement("div");
+                cell.style.position = "absolute";
+                cell.style.height = "20px";
+                cell.style.width = "20px";
+                cell.style.left = j * 20 + "px";
+                cell.style.right = i * 20 + "px";
+
+                if(arrMap[i][j] == 0){
+                    cell.style.backgroundColor = "white";
+                    cell.setAttribute("isGround", false);
+                }else{
+                    cell.style.backgroundColor = "black";
+                    cell.setAttribute("isGround", true);
+                }
+
+                tableBoard.appendChild(cell);
+            }
         }
 
         function moveBall(){
-            if(left & !right){
-                ball.d_horizontal = 0;
-            }else if(!left && right){
-                ball.d_horizontal = 2;
+            if(isLeft & !isRight){
+                ball.directionX = 0;
+            }else if(!isLeft && isRight){
+                ball.directionX = 2;
             }else{
-                ball.d_horizontal = 1;
+                ball.directionX = 1;
             }
 
-            if(ball.d_horizontal == 0){
+            if(ball.directionX == 0){
                 ball.forceX -= 0.5;
-            }else if(ball.d_horizontal == 2){
+            }else if(ball.directionX == 2){
                 ball.forceX += 0.5;
             }
             
@@ -232,10 +229,14 @@
                 ball.forceX = -10;
             }
 
-            calEnergy();
+            setEnergy();
         }
 
-        function calEnergy(){
+        function removePX(point){
+            return Number(point.split("px")[0]);
+        }
+
+        function setEnergy(){
             if(ball.forceX != 0){
                 if(ball.forceX > 0){
                     ball.forceX -= 0.2;
@@ -254,8 +255,8 @@
 
             ball.forceY += 0.2;
 
-            x = remove_px(divBall.style.left);
-            y = remove_px(divBall.style.top);
+            x = removePX(divBall.style.left);
+            y = removePX(divBall.style.top);
 
             x1 = Math.floor(x / 20);
             mx1 = Math.floor((x + ball.forceX) / 20);
@@ -298,27 +299,6 @@
             divBall.style.left = x + ball.forceX + "px";
             divBall.style.top = y + ball.forceY + "px";
         }
-
-        function drawBoard(){
-            for(var i = 0; i < 20; i++){
-                var tr = document.createElement("tr");
-                for(var j = 0; j < 30; j++){
-                    var td = document.createElement("td");
-
-                    td.width = "20px";
-                    td.height = "20px";
-
-                    if(arrMap[i][j] == 1){
-                        td.style = `background-color: black;`;
-                    }
-
-                    tr.append(td);
-                }
-
-                tableBoard.append(tr);
-            }
-
-            initializeBall();
-        }
+    }
     </script>
 </html>
