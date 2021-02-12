@@ -111,7 +111,11 @@
 
             x4 = Math.floor((x + 10) / 20);
             y4 = Math.floor((y + 10) / 20);
-            
+
+            if(isOutOfMap(x, y)){
+                location.reload();
+            }
+
             var reverseForceX = -ball.forceX;
             var reverseForceY = -ball.forceY;
 
@@ -213,6 +217,14 @@
 
                 tableBoard.appendChild(cell);
             }
+        }
+
+        function isOutOfMap(x, y){
+            if(x / 20 < 30 && y / 20 < 20){
+                return false;
+            }
+
+            return true;
         }
 
         function moveBall(){
