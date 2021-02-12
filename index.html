@@ -241,7 +241,7 @@
                         cell.id = "divStar";
                     }
 
-                tableBoard.appendChild(cell);
+                    tableBoard.appendChild(cell);
                 }
             }
         }
@@ -255,7 +255,7 @@
         }
 
         function moveBall(){
-            if(isLeft & !isRight){
+            if(isLeft && !isRight){
                 ball.directionY = 0;
             }else if(!isLeft && isRight){
                 ball.directionY = 2;
@@ -263,9 +263,9 @@
                 ball.directionY = 1;
             }
 
-            if(ball.directionX == 0){
+            if(ball.directionY == 0){
                 ball.forceX = -2.5;
-            }else if(ball.directionX == 2){
+            }else if(ball.directionY == 2){
                 ball.forceX = 2.5;
             }
             
