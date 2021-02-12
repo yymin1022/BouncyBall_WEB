@@ -34,7 +34,7 @@
 
     <img>
         <div id="tableMap" class="board-padding board"></div>
-        <img id="divBall" src="ball.png" style="position: absolute; left: 10px; top: 10px;"></img>
+        <div id="divBall" style="background-color: #f6f600; position: absolute; left: 10px; top: 10px; width: 10px; height: 10px; border-radius: 5px;"></div>
     </body>
     <script>
         var divBall = document.getElementById("divBall");
@@ -111,7 +111,7 @@
 
             x4 = Math.floor((x + 10) / 20);
             y4 = Math.floor((y + 10) / 20);
-
+            
             var reverseForceX = -ball.forceX;
             var reverseForceY = -ball.forceY;
 
