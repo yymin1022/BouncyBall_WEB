@@ -122,7 +122,8 @@
                     }
                 }else if(cng1 == 4){
                     if(arrMap[y1][x1]){
-                        ball.forceX = 3.5;
+                        ball.forceX = 3.0;
+                        divball.style.left = removePX(divBall.style.left) + ball.forceX + "px";
                     }
                 }
             }
@@ -134,7 +135,8 @@
                     }
                 }else if(cng2 == 2){
                     if(arrMap[y2][x2]){
-                        ball.forceX = -3.5;
+                        ball.forceX = -3.0;
+                        divball.style.left = removePX(divBall.style.left) + ball.forceX + "px";
                     }
                 }
             }
@@ -142,7 +144,8 @@
             if(cng3 != 0){
                 if(cng3 == 4){
                     if(arrMap[y3][x3]){
-                        ball.forceX = 3.5;
+                        ball.forceX = 3.0;
+                        divball.style.left = removePX(divBall.style.left) + ball.forceX + "px";
                     }
                 }else if(cng3 == 3){
                     if(arrMap[y3][x3]){
@@ -154,7 +157,8 @@
             if(cng4 != 0){
                 if(cng4 == 2){
                     if(arrMap[y4][x4]){
-                        ball.forceX = -3.5;
+                        ball.forceX = -3.0;
+                        divball.style.left = removePX(divBall.style.left) + ball.forceX + "px";
                     }
                 }else if(cng4 == 3){
                     if(arrMap[y4][x4]){
@@ -221,7 +225,7 @@
             }
 
             if(ball.directionX == 0){
-                ball.forceX -  2.5;
+                ball.forceX = -2.5;
             }else if(ball.directionX == 2){
                 ball.forceX = 2.5;
             }
