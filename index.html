@@ -112,14 +112,17 @@
             x4 = Math.floor((x + 10) / 20);
             y4 = Math.floor((y + 10) / 20);
 
+            var reverseForceX = -ball.forceX;
+            var reverseForceY = -ball.forceY;
+
             if(cng1 != 0){
                 if(cng1 == 1){
                     if(arrMap[y1][x1]){
-                        ball.forceY = -ball.forceY;
+                        ball.forceY = reverseForceY;
                     }
                 }else if(cng1 == 4){
                     if(arrMap[y1][x1]){
-                        ball.forceX = 10;
+                        ball.forceX = 3.5;
                     }
                 }
             }
@@ -127,11 +130,11 @@
             if(cng2 != 0){
                 if(cng2 == 1){
                     if(arrMap[y2][x2]){
-                        ball.forceY = -ball.forceY;
+                        ball.forceY = reverseForceY;
                     }
                 }else if(cng2 == 2){
                     if(arrMap[y2][x2]){
-                        ball.forceX = -10;
+                        ball.forceX = -3.5;
                     }
                 }
             }
@@ -139,7 +142,7 @@
             if(cng3 != 0){
                 if(cng3 == 4){
                     if(arrMap[y3][x3]){
-                        ball.forceX = 10;
+                        ball.forceX = 3.5;
                     }
                 }else if(cng3 == 3){
                     if(arrMap[y3][x3]){
@@ -151,11 +154,11 @@
             if(cng4 != 0){
                 if(cng4 == 2){
                     if(arrMap[y4][x4]){
-                        ball.forceX = -10;
+                        ball.forceX = -3.5;
                     }
                 }else if(cng4 == 3){
                     if(arrMap[y4][x4]){
-                        ball.forceY =-3.5;
+                        ball.forceY = -3.5;
                     }
                 }
             }
@@ -280,19 +283,29 @@
 
             if(x1 > mx1){
                 cng1 = 4;
-            }else if(y1 > my1){
+            }
+            if(y1 > my1){
                 cng1 = 1;
-            }else if(x2 < mx2){
+            }
+            
+            if(x2 < mx2){
                 cng2 = 2;
-            }else if(y2 > my2){
+            }
+            if(y2 > my2){
                 cng2 = 1;
-            }else if(x3 > mx3){
+            }
+            
+            if(x3 > mx3){
                 cng3 = 4;
-            }else if(y3 < my3){
+            }
+            if(y3 < my3){
                 cng3 = 3;
-            }else if(x4 < mx4){
+            }
+            
+            if(x4 < mx4){
                 cng4 = 2;
-            }else if(y4 < my4){
+            }
+            if(y4 < my4){
                 cng4 = 3;
             }
 
