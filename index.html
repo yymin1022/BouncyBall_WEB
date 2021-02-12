@@ -91,10 +91,17 @@
         var cng3 = 0;
         var cng4 = 0;
 
+        var intervalMain = setInterval(main, 17);
+
         drawBoard();
-        setInterval(main, 17);
 
         function main(){
+            if(countStar == 0){
+                clearInterval(intervalMain);
+                alert("Clear!!");
+                location.reload();
+            }
+
             moveBall();   
 
             x = removePX(divBall.style.left);
