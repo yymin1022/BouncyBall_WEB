@@ -123,7 +123,7 @@
 
                         for(var j = 0; j < listCellStars.length; j++){
                             if(removePX(listCellStars[j].style.left) == arrStar[i][1] * 20){
-                                listCellStars[j].style.backgroundColor = "white";
+                                listCellStars[j].innerText = "";
 
                                 arrMap[Math.floor(y / 20), Math.floor(x / 20)] = 0;
                                 arrStar[i][0] = 0;
@@ -236,7 +236,8 @@
                         arrStar.push([i, j]);
                         countStar++;
 
-                        cell.style.backgroundColor = "yellow";
+                        cell.innerText = "★";
+                        cell.style.color = "yellow";
                         cell.setAttribute("isGround", false);
                         cell.id = "divStar";
                     }
