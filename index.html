@@ -140,11 +140,11 @@
 
             if(cng1 != 0){
                 if(cng1 == 1){
-                    if(arrMap[y1][x1]){
+                    if(arrMap[y1][x1] == 1){
                         ball.forceY = reverseForceY;
                     }
                 }else if(cng1 == 4){
-                    if(arrMap[y1][x1]){
+                    if(arrMap[y1][x1] == 1){
                         ball.forceX = 3.0;
                         divball.style.left = removePX(divBall.style.left) + ball.forceX + "px";
                     }
@@ -153,11 +153,11 @@
 
             if(cng2 != 0){
                 if(cng2 == 1){
-                    if(arrMap[y2][x2]){
+                    if(arrMap[y2][x2] == 1){
                         ball.forceY = reverseForceY;
                     }
                 }else if(cng2 == 2){
-                    if(arrMap[y2][x2]){
+                    if(arrMap[y2][x2] == 1){
                         ball.forceX = -3.0;
                         divball.style.left = removePX(divBall.style.left) + ball.forceX + "px";
                     }
@@ -166,12 +166,12 @@
 
             if(cng3 != 0){
                 if(cng3 == 4){
-                    if(arrMap[y3][x3]){
+                    if(arrMap[y3][x3] == 1){
                         ball.forceX = 3.0;
                         divball.style.left = removePX(divBall.style.left) + ball.forceX + "px";
                     }
                 }else if(cng3 == 3){
-                    if(arrMap[y3][x3]){
+                    if(arrMap[y3][x3] == 1){
                         ball.forceY = -3.5;
                     }
                 }
@@ -179,12 +179,12 @@
 
             if(cng4 != 0){
                 if(cng4 == 2){
-                    if(arrMap[y4][x4]){
+                    if(arrMap[y4][x4] == 1){
                         ball.forceX = -3.0;
                         divball.style.left = removePX(divBall.style.left) + ball.forceX + "px";
                     }
                 }else if(cng4 == 3){
-                    if(arrMap[y4][x4]){
+                    if(arrMap[y4][x4] == 1){
                         ball.forceY = -3.5;
                     }
                 }
@@ -218,28 +218,28 @@
 
         function drawBoard(){
             for(var i = 0; i < arrMap.length; i++){
-            for(var j = 0; j < arrMap[i].length; j++){
-                var cell = document.createElement("div");
-                cell.style.position = "absolute";
-                cell.style.height = "20px";
-                cell.style.width = "20px";
-                cell.style.left = j * 20 + "px";
-                cell.style.right = i * 20 + "px";
+                for(var j = 0; j < arrMap[i].length; j++){
+                    var cell = document.createElement("div");
+                    cell.style.position = "absolute";
+                    cell.style.height = "20px";
+                    cell.style.width = "20px";
+                    cell.style.left = j * 20 + "px";
+                    cell.style.top = i * 20 + "px";
 
-                if(arrMap[i][j] == 0){
-                    cell.style.backgroundColor = "white";
-                    cell.setAttribute("isGround", false);
-                }else if(arrMap[i][j] == 1){
-                    cell.style.backgroundColor = "black";
-                    cell.setAttribute("isGround", true);
-                }else if(arrMap[i][j] == 2){
-                    arrStar.push([i, j]);
-                    countStar++;
+                    if(arrMap[i][j] == 0){
+                        cell.style.backgroundColor = "white";
+                        cell.setAttribute("isGround", false);
+                    }else if(arrMap[i][j] == 1){
+                        cell.style.backgroundColor = "black";
+                        cell.setAttribute("isGround", true);
+                    }else if(arrMap[i][j] == 2){
+                        arrStar.push([i, j]);
+                        countStar++;
 
-                    cell.style.backgroundColor = "yellow";
-                    cell.setAttribute("isGround", false);
-                    cell.id = "divStar";
-                }
+                        cell.style.backgroundColor = "yellow";
+                        cell.setAttribute("isGround", false);
+                        cell.id = "divStar";
+                    }
 
                 tableBoard.appendChild(cell);
             }
