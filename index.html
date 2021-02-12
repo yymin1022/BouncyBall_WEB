@@ -95,7 +95,7 @@
         setInterval(main, 17);
 
         function main(){
-            moveBall();
+            moveBall;   
 
             x = removePX(divBall.style.left);
             y = removePX(divBall.style.top);
@@ -146,7 +146,7 @@
                 }else if(cng1 == 4){
                     if(arrMap[y1][x1] == 1){
                         ball.forceX = 3.0;
-                        divball.style.left = removePX(divBall.style.left) + ball.forceX + "px";
+                        divBall.style.left = removePX(divBall.style.left) + ball.forceX + "px";
                     }
                 }
             }
@@ -159,7 +159,7 @@
                 }else if(cng2 == 2){
                     if(arrMap[y2][x2] == 1){
                         ball.forceX = -3.0;
-                        divball.style.left = removePX(divBall.style.left) + ball.forceX + "px";
+                        divBall.style.left = removePX(divBall.style.left) + ball.forceX + "px";
                     }
                 }
             }
@@ -168,7 +168,7 @@
                 if(cng3 == 4){
                     if(arrMap[y3][x3] == 1){
                         ball.forceX = 3.0;
-                        divball.style.left = removePX(divBall.style.left) + ball.forceX + "px";
+                        divBall.style.left = removePX(divBall.style.left) + ball.forceX + "px";
                     }
                 }else if(cng3 == 3){
                     if(arrMap[y3][x3] == 1){
@@ -181,7 +181,7 @@
                 if(cng4 == 2){
                     if(arrMap[y4][x4] == 1){
                         ball.forceX = -3.0;
-                        divball.style.left = removePX(divBall.style.left) + ball.forceX + "px";
+                        divBall.style.left = removePX(divBall.style.left) + ball.forceX + "px";
                     }
                 }else if(cng4 == 3){
                     if(arrMap[y4][x4] == 1){
@@ -242,6 +242,7 @@
                     }
 
                 tableBoard.appendChild(cell);
+                }
             }
         }
 
@@ -255,11 +256,11 @@
 
         function moveBall(){
             if(isLeft & !isRight){
-                ball.directionX = 0;
+                ball.directionY = 0;
             }else if(!isLeft && isRight){
-                ball.directionX = 2;
+                ball.directionY = 2;
             }else{
-                ball.directionX = 1;
+                ball.directionY = 1;
             }
 
             if(ball.directionX == 0){
@@ -354,6 +355,5 @@
             divBall.style.left = x + ball.forceX + "px";
             divBall.style.top = y + ball.forceY + "px";
         }
-    }
     </script>
 </html>
