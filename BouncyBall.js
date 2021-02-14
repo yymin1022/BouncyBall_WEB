@@ -15,11 +15,11 @@ var arrMap = [
     [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 2, 2, 0, 3, 0, 0, 0, 1, 0, 0, 0, 0],
+    [0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0],
     [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 2, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ];
@@ -53,6 +53,7 @@ var cng3 = 0;
 var cng4 = 0;
 
 var intervalMain = setInterval(main, 17);
+var highJumped = false;
 
 drawBoard();
 
@@ -91,7 +92,8 @@ function main(){
 
                 for(var j = 0; j < listCellStars.length; j++){
                     if(removePX(listCellStars[j].style.left) == arrStar[i][1] * 20){
-                        listCellStars[j].children[0].style.color = "#00000000";
+                        listCellStars[j].innerText = "";
+                        listCellStars[j].style.marginTop = "0px";
 
                         arrMap[Math.floor(y / 20), Math.floor(x / 20)] = 0;
                         arrStar[i][0] = 0;
@@ -110,11 +112,16 @@ function main(){
         if(cng1 == 1){
             if(arrMap[y1][x1] == 1){
                 ball.forceY = reverseForceY;
+                highJumped = false;
+            }else if(arrMap[y1][x1] == 3){
+                ball.forceY = -6.0;
+                highJumped = true;
             }
-        } else if(cng1 == 4){
+        }else if(cng1 == 4){
             if(arrMap[y1][x1] == 1){
                 ball.forceX = 3.0;
                 divBall.style.left = removePX(divBall.style.left) + ball.forceX + "px";
+                highJumped = false;
             }
         }
     }
@@ -123,11 +130,20 @@ function main(){
         if(cng2 == 1){
             if(arrMap[y2][x2] == 1){
                 ball.forceY = reverseForceY;
+                highJumped = false;
+            }else if(arrMap[y2][x2] == 3){
+                ball.forceY = -6.0;
+                highJumped = true;
             }
-        } else if(cng2 == 2){
+        }else if(cng2 == 2){
             if(arrMap[y2][x2] == 1){
                 ball.forceX = -3.0;
                 divBall.style.left = removePX(divBall.style.left) + ball.forceX + "px";
+                highJumped = false;
+            }else if(arrMap[y2][x2] == 3 && !highJumped){
+                ball.forceX = 3.0;
+                divBall.style.left = removePX(divBall.style.left) + ball.forceX + "px";
+                highJumped = true;
             }
         }
     }
@@ -137,11 +153,17 @@ function main(){
             if(arrMap[y3][x3] == 1){
                 ball.forceX = 3.0;
                 divBall.style.left = removePX(divBall.style.left) + ball.forceX + "px";
+                highJumped = false;
+            }if(arrMap[y3][x3] == 3 && !highJumped){
+                ball.forceX = 3.0;
+                divBall.style.left = removePX(divBall.style.left) + ball.forceX + "px";
+                highJumped = true;
             }
-        } else if(cng3 == 3){
+        }else if(cng3 == 3){
             if(arrMap[y3][x3] == 1){
                 ball.forceY = -3.5;
             }
+            highJumped = false;
         }
     }
 
@@ -150,11 +172,17 @@ function main(){
             if(arrMap[y4][x4] == 1){
                 ball.forceX = -3.0;
                 divBall.style.left = removePX(divBall.style.left) + ball.forceX + "px";
+                highJumped = false;
+            }else if(arrMap[y4][x4] == 3 && !highJumped){
+                ball.forceX = -3.0;
+                divBall.style.left = removePX(divBall.style.left) + ball.forceX + "px";
+                highJumped = true;
             }
-        } else if(cng4 == 3){
+        }else if(cng4 == 3){
             if(arrMap[y4][x4] == 1){
                 ball.forceY = -3.5;
             }
+            highJumped = false;
         }
     }
 }
@@ -196,27 +224,28 @@ function drawBoard(){
 
             if(arrMap[i][j] == 0){
                 // Blank Sky
-                cell.style.backgroundColor = "#e5e5e5";
                 cell.setAttribute("isGround", false);
-            } else if(arrMap[i][j] == 1){
+                cell.className = "blockSky";
+            }else if(arrMap[i][j] == 1){
                 // Normal Block
-                cell.style.backgroundColor = "black";
                 cell.setAttribute("isGround", true);
-            } else if(arrMap[i][j] == 2){
+                cell.className = "blockGround";
+            }else if(arrMap[i][j] == 2){
                 // Star
-                var starCell = document.createElement("div");
-                starCell.innerText = "★";
-                starCell.style.backgroundColor = "e5e5e5";
-                starCell.style.color = "#f6f600";
-                starCell.style.fontSize = "20px";
-                starCell.style.marginTop = "-6px";
-
                 arrStar.push([i, j]);
                 countStar++;
 
-                cell.appendChild(starCell);
+                cell.innerText = "★";
+
                 cell.setAttribute("isGround", false);
+                cell.className = "blockStar";
                 cell.id = "divStar";
+            }else if(arrMap[i][j] == 3){
+                // Jump Block
+                cell.innerText = "★";
+
+                cell.setAttribute("isGround", false);
+                cell.className = "blockJump";
             }
 
             tableBoard.appendChild(cell);
@@ -234,21 +263,21 @@ function isOutOfMap(x, y){
 function moveBall(){
     if(isLeft && !isRight){
         ball.directionY = 0;
-    } else if(!isLeft && isRight){
+    }else if(!isLeft && isRight){
         ball.directionY = 2;
-    } else {
+    }else {
         ball.directionY = 1;
     }
 
     if(ball.directionY == 0){
         ball.forceX = -2.5;
-    } else if(ball.directionY == 2){
+    }else if(ball.directionY == 2){
         ball.forceX = 2.5;
     }
 
     if(ball.forceX > 10){
         ball.forceX = 10;
-    } else if(ball.forceX < -10){
+    }else if(ball.forceX < -10){
         ball.forceX = -10;
     }
 
@@ -267,7 +296,7 @@ function setEnergy(){
             if(ball.forceX < 0){
                 ball.forceX = 0;
             }
-        } else {
+        }else {
             ball.forceX += 0.2;
 
             if(ball.forceX > 0){

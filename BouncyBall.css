@@ -12,6 +12,27 @@
     border-radius: 5px;
 }
 
+.blockGround{
+    background-color: black;
+}
+
+.blockJump{
+    background-color: #0098f6;
+    color: white;
+    font-size: 20px;
+}
+
+.blockSky{
+    background-color: #e5e5e5;
+}
+
+.blockStar{
+    background-color: #e5e5e5;
+    color: #f6f600;
+    font-size: 20px;
+    margin-top: -6px
+}
+
 .board{
     border: 0px solid black;
 }
