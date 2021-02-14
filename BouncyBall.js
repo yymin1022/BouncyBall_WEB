@@ -92,8 +92,7 @@ function main(){
 
                 for(var j = 0; j < listCellStars.length; j++){
                     if(removePX(listCellStars[j].style.left) == arrStar[i][1] * 20){
-                        listCellStars[j].innerText = "";
-                        listCellStars[j].style.marginTop = "0px";
+                        listCellStars[j].children[0].style.color = "#00000000";
 
                         arrMap[Math.floor(y / 20), Math.floor(x / 20)] = 0;
                         arrStar[i][0] = 0;
@@ -234,9 +233,11 @@ function drawBoard(){
                 // Star
                 arrStar.push([i, j]);
                 countStar++;
+                
+                var starCell = document.createElement("div");
+                starCell.innerText = "★";
 
-                cell.innerText = "★";
-
+                cell.appendChild(starCell);
                 cell.setAttribute("isGround", false);
                 cell.className = "blockStar";
                 cell.id = "divStar";
