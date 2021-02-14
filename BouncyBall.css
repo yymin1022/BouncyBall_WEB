@@ -1,0 +1,35 @@
+#board{
+    border-collapse: collapse;
+}
+
+.ball{
+    background-color: #f6f600;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+}
+
+.board{
+    border: 0px solid black;
+}
+
+.board-padding{
+    background-color: grey;
+    border: 0px solid black;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
+    padding: calc(var(--cell-size) / 2);
+}
+
+.center{
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.hide{
+    display: none;
+}
