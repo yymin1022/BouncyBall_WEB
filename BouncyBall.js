@@ -115,7 +115,7 @@ function main(){
             if(arrMap[y1][x1] == 1){
                 ball.forceY = reverseForceY;
                 highJumped = false;
-            }else if(arrMap[y1][x1] == 3){
+            }else if(arrMap[y1][x1] == 3 && !highJumped){
                 ball.forceY = -6.0;
                 highJumped = true;
             }
@@ -137,7 +137,7 @@ function main(){
             if(arrMap[y2][x2] == 1){
                 ball.forceY = reverseForceY;
                 highJumped = false;
-            }else if(arrMap[y2][x2] == 3){
+            }else if(arrMap[y2][x2] == 3 && !highJumped){
                 ball.forceY = -6.0;
                 highJumped = true;
             }
@@ -168,8 +168,11 @@ function main(){
         }else if(cng3 == 3){
             if(arrMap[y3][x3] == 1){
                 ball.forceY = -3.5;
+                highJumped = false;
+            }else if(arrMap[y3][x3] == 3 && !highJumped){
+                ball.forceY = -6.0;
+                highJumped = true;
             }
-            highJumped = false;
         }
     }
 
@@ -187,8 +190,11 @@ function main(){
         }else if(cng4 == 3){
             if(arrMap[y4][x4] == 1){
                 ball.forceY = -3.5;
+                highJumped = false;
+            }else if(arrMap[y4][x4] == 3 && !highJumped){
+                ball.forceY = -6.0;
+                highJumped = true;
             }
-            highJumped = false;
         }
     }
 }
@@ -234,20 +240,29 @@ function drawBoard(){
                 cell.className = "blockSky";
             }else if(arrMap[i][j] == 1){
                 // Normal Block
+                var img = document.createElement("img");
+                img.src = "block_ground.png";
+                cell.appendChild(img);
+
                 cell.setAttribute("isGround", true);
                 cell.className = "blockGround";
             }else if(arrMap[i][j] == 2){
                 // Star
                 arrStar.push([i, j]);
                 countStar++;
+
+                var img = document.createElement("img");
+                img.src = "star.png";
+                cell.appendChild(img);
                 
                 cell.setAttribute("isGround", false);
                 cell.className = "blockStar";
                 cell.id = "divStar";
-                cell.innerText = "★";
             }else if(arrMap[i][j] == 3){
                 // Jump Block
-                cell.innerText = "★";
+                var img = document.createElement("img");
+                img.src = "block_jump.png";
+                cell.appendChild(img);
 
                 cell.setAttribute("isGround", true);
                 cell.className = "blockJump";

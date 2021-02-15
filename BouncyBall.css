@@ -1,9 +1,11 @@
+@charset "utf-8"
+
 #board{
     border-collapse: collapse;
 }
 
 .ball{
-    background-color: #f6f600;
+    background-color: #e3d800;
     position: absolute;
     left: 10px;
     top: 10px;
@@ -13,24 +15,22 @@
 }
 
 .blockGround{
-    background-color: black;
+    border-radius: 2px;
 }
 
 .blockJump{
-    background-color: #0098f6;
+    border-radius: 2px;
     color: white;
     font-size: 20px;
 }
 
 .blockSky{
-    background-color: #e5e5e5;
+
 }
 
 .blockStar{
-    background-color: #e5e5e5;
     color: #f6f600;
     font-size: 20px;
-    margin-top: -6px
 }
 
 .board{
