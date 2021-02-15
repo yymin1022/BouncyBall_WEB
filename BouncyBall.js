@@ -92,7 +92,8 @@ function main(){
 
                 for(var j = 0; j < listCellStars.length; j++){
                     if(removePX(listCellStars[j].style.left) == arrStar[i][1] * 20){
-                        listCellStars[j].children[0].style.color = "#00000000";
+                        listCellStars[j].innerText = "";
+                        listCellStars[j].style.marginTop = "0px";
 
                         arrMap[Math.floor(y / 20), Math.floor(x / 20)] = 0;
                         arrStar[i][0] = 0;
@@ -121,6 +122,10 @@ function main(){
                 ball.forceX = 3.0;
                 divBall.style.left = removePX(divBall.style.left) + ball.forceX + "px";
                 highJumped = false;
+            }else if(arrMap[y1][x1] == 3 && !highJumped){
+                ball.forceX = 3.0;
+                divBall.style.left = removePX(divBall.style.left) + ball.forceX + "px";
+                highJumped = true;
             }
         }
     }
@@ -234,18 +239,15 @@ function drawBoard(){
                 arrStar.push([i, j]);
                 countStar++;
                 
-                var starCell = document.createElement("div");
-                starCell.innerText = "★";
-
-                cell.appendChild(starCell);
                 cell.setAttribute("isGround", false);
                 cell.className = "blockStar";
                 cell.id = "divStar";
+                cell.innerText = "★";
             }else if(arrMap[i][j] == 3){
                 // Jump Block
                 cell.innerText = "★";
 
-                cell.setAttribute("isGround", false);
+                cell.setAttribute("isGround", true);
                 cell.className = "blockJump";
             }
 
