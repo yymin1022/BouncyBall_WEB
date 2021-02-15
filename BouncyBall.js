@@ -81,6 +81,8 @@ function main(){
     x4 = Math.floor((x + 10) / 20);
     y4 = Math.floor((y + 10) / 20);
 
+    window.scrollTo(x - 200, 9);
+
     if(isOutOfMap(x, y)){
         location.reload();
     }
